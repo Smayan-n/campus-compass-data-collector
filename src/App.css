@@ -1,42 +1,117 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* .outer{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.main-form{
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  row-gap: 20px;
+  column-gap: 20px;
+  
+  width: 80%;
+  border: 2px solid red;
+  font-size: 18px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.type-sssc{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.type-subsection{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input{
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-size: 20px;
+} */
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.main-form {
+  display: flex;
+  flex-direction: column;
 }
 
-.card {
-  padding: 2em;
+.type-section {
+  margin-bottom: 15px;
 }
 
-.read-the-docs {
-  color: #888;
+.type-subsection {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.type-sssc {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+input[type="radio"],
+input[type="checkbox"],
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+  width: 100%;
+  padding: 12px; /* Increased padding */
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Larger checkboxes and radio buttons */
+input[type="checkbox"],
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
+}
+
+.coord {
+  margin-bottom: 10px;
+}
+
+.coord-disp {
+  margin-bottom: 10px;
+}
+
+.image-viewer {
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
 }
