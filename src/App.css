@@ -83,6 +83,7 @@ input[type="file"] {
   padding: 12px; /* Increased padding */
   margin-bottom: 10px;
   box-sizing: border-box;
+  margin-right: 10px;
 }
 
 /* Larger checkboxes and radio buttons */

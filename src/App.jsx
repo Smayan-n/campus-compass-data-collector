@@ -3,6 +3,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { useRef, useState } from "react";
 import "./App.css";
 import { firebaseStorage, firestoreDB } from "./firebase";
+//new comment
 
 function App() {
 	const [selectedImage, setSelectedImage] = useState(null);
@@ -86,6 +87,9 @@ function App() {
 			(snapshot) => {
 				window.alert("Uploaded image file!", snapshot.id);
 				console.log("Uploaded image file!", snapshot.id);
+
+				//reload page
+				window.location.reload();
 			},
 			(error) => {
 				window.alert("Error uploading image file: ", error);
@@ -119,9 +123,9 @@ function App() {
 							<label htmlFor="fountain">Water Fountain</label>
 						</div>
 						<div className="type-sssc">
-							<label htmlFor="dog">Drinking</label>
+							<label htmlFor="dog">Drinking:</label>
 							<input ref={fountainDrinkingRef} type="checkbox" id="dog" value="drink" />
-							<label htmlFor="cat">Bottle</label>
+							<label htmlFor="cat">Bottle:</label>
 							<input ref={fountainBottleRef} type="checkbox" id="cat" value="snack" />
 						</div>
 					</div>
@@ -132,11 +136,11 @@ function App() {
 							<label htmlFor="vending">Vending Machine</label>
 						</div>
 						<div className="type-sssc">
-							<label htmlFor="do">Drink</label>
+							<label htmlFor="do">Drink:</label>
 							<input ref={vendingDrinkRef} type="checkbox" id="do" value="drinking" />
-							<label htmlFor="ca">Snack</label>
+							<label htmlFor="ca">Snack:</label>
 							<input ref={vendingSnackRef} type="checkbox" id="ca" value="bottle" />
-							<label htmlFor="caw">Utilities</label>
+							<label htmlFor="caw">Utilities:</label>
 							<input ref={vendingUtilitiesRef} type="checkbox" id="caw" value="bottle" />
 						</div>
 					</div>
@@ -180,7 +184,7 @@ function App() {
 				/>
 				{selectedImage && (
 					<div className="image-viewer">
-						<img width="200px" alt="No Image Selected" src={URL.createObjectURL(selectedImage)}></img>
+						<img width="100px" alt="No Image Selected" src={URL.createObjectURL(selectedImage)}></img>
 					</div>
 				)}
 
