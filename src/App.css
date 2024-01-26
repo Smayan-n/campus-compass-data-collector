@@ -80,10 +80,11 @@ input[type="text"],
 input[type="number"],
 input[type="file"] {
   width: 100%;
-  padding: 12px; /* Increased padding */
+  padding: 7px; /* Increased padding */
   margin-bottom: 10px;
   box-sizing: border-box;
   margin-right: 10px;
+  margin-top: 5px;
 }
 
 /* Larger checkboxes and radio buttons */
@@ -115,4 +116,12 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
+.coords-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }

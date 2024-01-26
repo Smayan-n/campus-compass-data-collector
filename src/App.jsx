@@ -5,6 +5,59 @@ import "./App.css";
 import { firebaseStorage, firestoreDB } from "./firebase";
 //new comment
 
+const buildings = [
+	"Anderson Hall (AND)",
+	"Architecture Hall (ARC)",
+	"Art Building (ART)",
+	"Bagley Hall (BAG)",
+	"Bank of America Executive Education Center (EXED)",
+	"Benson Hall (BNS)",
+	"Bill and Melinda Gates Center for Computer Science and Engineering (CSE2)",
+	"Bloedel Hall (BLD)",
+	"Chemistry Library Building (CHL)",
+	"Clark Hall (CLK)",
+	"Communications Building (CMU)",
+	"Condon Hall (CDH)",
+	"Dempsey Hall (DEM)",
+	"Denny Hall (DEN)",
+	"Eagleson Hall (EGL)",
+	"Electrical and Computer Engineering Building (ECE)",
+	"Fisheries Teaching and Research Center (FTR)",
+	"Fishery Sciences Building (FSH)",
+	"Gould Hall (GLD)",
+	"Gowen Hall (GWN)",
+	"Guggenheim Hall (GUG)",
+	"Hans Rosling Center for Population Health (HRC)",
+	"Hitchcock Hall (HCK)",
+	"Johnson Hall (JHN)",
+	"Kane Hall (KNE)",
+	"Loew Hall (LOW)",
+	"Marine Studies Building (MAR)",
+	"Mary Gates Hall (MGH)",
+	"Mechanical Engineering Building (MEB)",
+	"Miller Hall (MLR)",
+	"More Hall (MOR)",
+	"Mueller Hall (MUE)",
+	"Music Building (MUS)",
+	"Nanoengineering and Sciences Bldg (NAN)",
+	"Oceanography Teaching Building (OTB)",
+	"Odegaard Undergraduate Library (OUG)",
+	"Paccar Hall (PCAR)",
+	"Parrington Hall (PAR)",
+	"Physics/Astronomy Auditorium (PAA)",
+	"Physics/Astronomy Building (PAB)",
+	"Raitt Hall (RAI)",
+	"Savery Hall (SAV)",
+	"Sieg Hall (SIG)",
+	"Smith Hall (SMI)",
+	"Social Work/Speech and Hearing Sciences Building (SWS)",
+	"Thomson Hall (THO)",
+	"Winkenwerder Forest Science Lab (WFS)",
+	"Intramural Activities Center (IMA)",
+	"The Husky Union Building",
+	"Suzzallo & Allen Library",
+];
+
 function App() {
 	const [selectedImage, setSelectedImage] = useState(null);
 	const vendingRef = useRef(null);
@@ -14,6 +67,8 @@ function App() {
 	const fountainRef = useRef(null);
 	const fountainDrinkingRef = useRef(null);
 	const fountainBottleRef = useRef(null);
+	const latRef = useRef(null);
+	const longRef = useRef(null);
 
 	const floorRef = useRef(null);
 	const descRef = useRef(null);
@@ -33,9 +88,12 @@ function App() {
 		const floor = floorRef.current.value;
 		const desc = descRef.current.value;
 		const building = buildingRef.current.value;
+		const lat = latRef.current.value;
+		const long = longRef.current.value;
 
+		console.log(building, buildings.includes(building));
 		if (vending || fountain) {
-			if (floor && desc && building && coords && selectedImage) {
+			if (floor && desc && coords && selectedImage && building && buildings.includes(building)) {
 				let subtypes = [];
 				if (vending) {
 					if (vendingDrink) {
@@ -63,7 +121,7 @@ function App() {
 						description: desc,
 						type: vending ? "vending" : "fountain",
 						subtypes: subtypes,
-						coords: new GeoPoint(coords.latitude, coords.longitude),
+						coords: lat && long ? new GeoPoint(lat, long) : new GeoPoint(coords.latitude, coords.longitude),
 					};
 					addResourceToDatabase(resource);
 				} else {
@@ -78,7 +136,7 @@ function App() {
 	};
 
 	const err = () => {
-		window.alert("Please fill out all fields and upload image");
+		window.alert("Please fill out all fields and upload image (*make sure building is valid*)");
 	};
 
 	async function uploadImageToStorage(docId) {
@@ -111,6 +169,17 @@ function App() {
 			}
 		);
 	}
+
+	const captureCoords = () => {
+		navigator.geolocation.getCurrentPosition(
+			(pos) => {
+				setCoords(pos.coords);
+			},
+			(err) => {
+				console.log(err);
+			}
+		);
+	};
 
 	return (
 		<div className="outer">
@@ -146,8 +215,15 @@ function App() {
 					</div>
 				</div>
 
-				<label htmlFor="building">Building</label>
-				<input ref={buildingRef} type="text" id="building" />
+				<label htmlFor="building">Building </label>
+				<input ref={buildingRef} list="buildings" name="building" id="building"></input>
+				<datalist id="buildings">
+					{buildings.map((building, index) => (
+						<option key={index} value={building}>
+							{building}
+						</option>
+					))}
+				</datalist>
 
 				<label htmlFor="desc">Description</label>
 				<input ref={descRef} type="text" id="desc" />
@@ -155,19 +231,15 @@ function App() {
 				<label htmlFor="floor">Floor</label>
 				<input ref={floorRef} type="number" id="floor" />
 
-				<button
-					onClick={navigator.geolocation.getCurrentPosition(
-						(pos) => {
-							console.log(pos);
-							setCoords(pos.coords);
-						},
-						(err) => {
-							console.log(err);
-						}
-					)}
-					className="coord"
-					type="button"
-				>
+				<p>Leave blank if using auto-coords</p>
+				<div className="coords-div">
+					<label htmlFor="lat">lat</label>
+					<input ref={latRef} type="number" step="0.00000000000000001" id="lat" />
+					<label htmlFor="long">long</label>
+					<input ref={longRef} type="number" step="0.0000000000000001" id="long" />
+				</div>
+
+				<button onClick={captureCoords} className="coord" type="button">
 					Record Coords
 				</button>
 				{coords && (
