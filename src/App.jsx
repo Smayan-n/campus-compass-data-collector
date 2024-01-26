@@ -93,7 +93,14 @@ function App() {
 
 		console.log(building, buildings.includes(building));
 		if (vending || fountain) {
-			if (floor && desc && coords && selectedImage && building && buildings.includes(building)) {
+			if (
+				floor &&
+				desc &&
+				(coords || (lat && long)) &&
+				selectedImage &&
+				building &&
+				buildings.includes(building)
+			) {
 				let subtypes = [];
 				if (vending) {
 					if (vendingDrink) {
