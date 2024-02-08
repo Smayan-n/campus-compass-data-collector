@@ -12,6 +12,7 @@ const buildings = [
 	"Bagley Hall (BAG)",
 	"Bank of America Executive Education Center (EXED)",
 	"Benson Hall (BNS)",
+	"Paul G. Allen Center for Computer Science & Engineering (CSE1)",
 	"Bill and Melinda Gates Center for Computer Science and Engineering (CSE2)",
 	"Bloedel Hall (BLD)",
 	"Chemistry Library Building (CHL)",
